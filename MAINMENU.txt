@@ -1,0 +1,13 @@
+		
+			+++++++++++++++++++++++++++++++++++++++++++++
+			+		 MAIN MENU	            +
+			+++++++++++++++++++++++++++++++++++++++++++++
+			+    	   01. ESTABLISH ACCOUNT            +
+			+          02. DEPOSIT AMOUNT               +
+			+          03. WITHDRAW AMOUNT              +
+			+          04. ACCOUNT DETAILS              +
+			+          05. ACCOUNT LIST                 +
+			+          06. TERMINATE ACCOUNT            +
+			+          07. MODIFY ACCOUNT	            + 
+			+          08. EXIT		            +
+			+++++++++++++++++++++++++++++++++++++++++++++
