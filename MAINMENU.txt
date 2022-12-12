@@ -5,9 +5,10 @@
 			+    	   01. ESTABLISH ACCOUNT            +
 			+          02. DEPOSIT AMOUNT               +
 			+          03. WITHDRAW AMOUNT              +
-			+          04. ACCOUNT DETAILS              +
-			+          05. ACCOUNT LIST                 +
-			+          06. TERMINATE ACCOUNT            +
-			+          07. MODIFY ACCOUNT	            + 
-			+          08. EXIT		            +
+			+	   04. TRANSFER CASH		    +
+			+          05. ACCOUNT DETAILS              +
+			+          06. ACCOUNT LIST                 +
+			+          07. TERMINATE ACCOUNT            +
+			+          08. MODIFY ACCOUNT	            + 
+			+          09. EXIT		            +
 			+++++++++++++++++++++++++++++++++++++++++++++
