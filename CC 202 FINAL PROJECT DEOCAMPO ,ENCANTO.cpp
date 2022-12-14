@@ -280,22 +280,7 @@ int main()
         
         //--------------------------------------------------------------------------------------------------------------//
         
-        case '6': // CASE FOR TERMINATE ACCOUNT
-			drawing (in_s); // function for file input
-			while(in_s.get(lines)) // Read all numbers one-by-one to the end of the file.
-					{
-					cout.put(lines);
-					}
-			cout << "\n\t\t\t_____________________________________________________________________________\n";
-			// prompts users for account number input
-            cout << "\n\t\t\tEnter The account No. : ";
-            cin >> num;
-            deleteAccount(num);// function call for deleting account
-            break;
-            
-         //--------------------------------------------------------------------------------------------------------------//
-        
-        case '7': // CASE FOR MODIFY ACCOUNT
+		case '6': // CASE FOR MODIFY ACCOUNT
 			drawing (in_s); // function for file input
 			while(in_s.get(lines)) // Read all numbers one-by-one to the end of the file.
 					{
@@ -306,6 +291,21 @@ int main()
 			cout << "\n\t\t\tInput Account Number for Modification : ";
             cin >> num;
             modifyAccount(num); // function call for modifying account
+            break;
+            
+         //--------------------------------------------------------------------------------------------------------------//
+        
+        case '7': // CASE FOR TERMINATE ACCOUNT
+			drawing (in_s); // function for file input
+			while(in_s.get(lines)) // Read all numbers one-by-one to the end of the file.
+					{
+					cout.put(lines);
+					}
+			cout << "\n\t\t\t_____________________________________________________________________________\n";
+			// prompts users for account number input
+            cout << "\n\t\t\tEnter The account No. : ";
+            cin >> num;
+            deleteAccount(num);// function call for deleting account
             break;
             
          //--------------------------------------------------------------------------------------------------------------//

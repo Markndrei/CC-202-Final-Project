@@ -7,7 +7,7 @@
 			+          03. WITHDRAW AMOUNT              +
 			+          04. ACCOUNT DETAILS              +
 			+          05. ACCOUNT LIST                 +
-			+          06. TERMINATE ACCOUNT            +
-			+          07. MODIFY ACCOUNT	            + 
+			+          06. MODIFY ACCOUNT               +
+			+          06. TERMINATE ACCOUNT	    + 
 			+          08. EXIT		            +
 			+++++++++++++++++++++++++++++++++++++++++++++
