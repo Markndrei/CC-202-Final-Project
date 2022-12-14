@@ -7,14 +7,13 @@ Program Description: the progam functions similarly to how bank management syste
 					read from files, and apply these changes by writing to the file
 */
 
-
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <cctype>
-#include <iomanip>
-#include <windows.h>
-#include <conio.h>
+#include <iostream> // user input and output
+#include <fstream> // allows reading and writing to a file
+#include <ctime> // accurate local time
+#include <cctype> // to access toupper () function
+#include <iomanip> // to access setw () function
+#include <windows.h> // access windows
+#include <conio.h> // to access getch () function
 using namespace std;
 
 class bankAccount // DECLARATION OF CLASS
@@ -28,12 +27,12 @@ class bankAccount // DECLARATION OF CLASS
 public: // ACCESS SPECIFIER [PUBLIC]
  
 	// PUBLIC METHODS PROTOTYPES:
-    void createAccount();    			  //function to get data from user
-    void showAccount() const; 			  //function to show data on screen
-    void modifyDetails();                //function to add new data
-    void depositCash(int);            	 //function to accept amount and add to balance amount
-    void withdrawCash(int);          	  //function to accept amount and subtract from balance amount
-    void accountDetails() const;     	  //function to show account details
+    void createAccount();    			  //function to establish account
+    void showAccount() const; 			  //function to display account details
+    void modifyDetails();                //function to modify account details
+    void depositCash(int);            	 //function to deposit cash in an account
+    void withdrawCash(int);          	  //function to withdraw cash in an account
+    void accountDetails() const;     	  //function to show list of accounts
     int retaccountNum() const;      	 //function to return account number
     int retminimumDep() const;   	    //function to return balance amount
     char rettype() const;     		    //function to return type of account
@@ -509,6 +508,7 @@ void modifyAccount(int n)
 
 void deleteAccount(int n)
 {
+	int choice;
     bankAccount ac; // class call
     ifstream inFile; // read from a file
     ofstream outFile; // write to a file
@@ -529,12 +529,19 @@ void deleteAccount(int n)
     }
     inFile.close(); // close file
     outFile.close(); // close file
+    cout << "\n\n\t\t\tAre you sure you want to proceed?[ 1 = Yes, 2 = No ] ";
+	cin >> choice;
+	if (choice == 1){
     remove("deonto.cpp"); // remove acount from the list
     rename("Temp.dat", "deonto.cpp"); // apply changes to the main file
      		system ("CLS"); // clears screen
       		loadingBar("TERMINATING ACCOUNT"); // calls loading bar
 			system ("CLS");// clears screen
     cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t ACCOUNT TERMINATED";
+	}
+	else {
+		return;
+	}
 }
 
 //-------------------------------------------------------------------------------------------------------//
