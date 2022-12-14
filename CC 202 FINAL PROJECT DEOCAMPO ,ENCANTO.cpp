@@ -1,8 +1,8 @@
 /*
 Program Title: Banking Management System
 Submitted by: Cherilyn Marie Deocampo and Mark Andrei Encanto
-Program Description: the progam functions similarly to how bank management system works; it allows users to
-					Establish an Account, Check Account Details, Check List of Accounts Recorded
+Program Description: the progam functions similarly to how bank management system works; it is an object oriented progam, 
+					wherein it allows users to Establish an Account, Check Account Details, Check List of Accounts Recorded
 					Deposit Cash, Withdraw Cash, Modify Account Details, and Terminate Accounts from recorded data
 					read from files, and apply these changes by writing to the file
 */
@@ -18,7 +18,7 @@ using namespace std;
 
 class bankAccount // DECLARATION OF CLASS
 {
-    // ATTRIBUTES DECLARATION:
+    // CLASS ATTRIBUTES DECLARATION:
 	int accountNum;
     char fullname[99];
     int minimumDep;
@@ -26,7 +26,7 @@ class bankAccount // DECLARATION OF CLASS
 
 public: // ACCESS SPECIFIER [PUBLIC]
  
-	// PUBLIC METHODS PROTOTYPES:
+	// METHODS FUNCTION PROTOTYPES:
     void createAccount();    			  //function to establish account
     void showAccount() const; 			  //function to display account details
     void modifyDetails();                //function to modify account details
@@ -409,7 +409,7 @@ void drawing(ifstream& in_s) // function header for bank drawing file reading
 
 void writeAccount()
 {
-    bankAccount de; // declares class
+    bankAccount de; // class object
     ofstream outFile; // stream to write to files
     outFile.open("deonto.cpp", ios::binary | ios::app); // open file and avoid overwriting inputs
     de.createAccount(); //calls create Account function
@@ -422,7 +422,7 @@ void writeAccount()
       		loadingBar("CREATING ACCOUNT"); // function call for loading bar
 			system ("CLS"); // clear screen
 			cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t ACCOUNT ESTABLISHED";
-			de.showAccount(); // function call to show account details														  // as expected by the write () function
+			de.showAccount(); // call the method to show account details														  // as expected by the write () function
     	}
     outFile.close(); // close file
 }
@@ -431,7 +431,7 @@ void writeAccount()
 //FUNCTION TO READ SPECIFIC RECORD FROM A FILE
 void displayDetails(int n)
 {
-    bankAccount de; // declares class
+    bankAccount de; // class object
     bool flag = false; // boolean expreassion
     ifstream inFile; // stream to read files
     inFile.open("deonto.cpp", ios::binary); // open file and avoid overwriting inputs
@@ -447,7 +447,7 @@ void displayDetails(int n)
         {   	
 			cout << "\n\n\n\t\t\t\t\t\t BALANCE DETAILS\n";
         	flag = true;// if account number input match the records
-            de.showAccount(); // function call to show account details
+            de.showAccount(); // call the method to show account details
         }
     }
     inFile.close();
@@ -462,7 +462,7 @@ void displayDetails(int n)
 void modifyAccount(int n)
 {
     bool found = false; 
-    bankAccount de; // function call
+    bankAccount de; // class object
     fstream File; // both read and write from and to a file
     File.open("deonto.cpp", ios::binary | ios::in | ios::out); // open file location
     if (!File) // if file is not found
@@ -477,7 +477,7 @@ void modifyAccount(int n)
 																	   comprehension*/
         if (de.retaccountNum() == n) // checker if the account number is similar to the input
         {
-            de.showAccount(); // function call to show account details
+            de.showAccount(); // call the method to show account details
             cout << "\n\t\t\t\t\t\tPROVIDE REPLACEMENT DETAILS" << endl;
             de.modifyDetails(); // function to initiate modifying account details
                 if ((de.retminimumDep () < 2000 && de.rettype() == 'S') || (de.retminimumDep () < 5000 && de.rettype() == 'C')){  // condition for 
@@ -496,7 +496,7 @@ void modifyAccount(int n)
 	      		loadingBar("MODIFYING ACCOUNT"); // call loadingBar function
 	      		system ("CLS");// clears screen
 	            cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t ACCOUNT MODIFIED";
-	            de.showAccount(); // function call to show account details
+	            de.showAccount(); // call the method to show account details
 	            found = true;}
         }
     }
@@ -511,7 +511,7 @@ void modifyAccount(int n)
 void deleteAccount(int n)
 {
 	int choice;
-    bankAccount de; // class call
+    bankAccount de; // class object
     ifstream inFile; // read from a file
     ofstream outFile; // write to a file
     inFile.open("deonto.cpp", ios::binary); // open main file
@@ -550,9 +550,9 @@ void deleteAccount(int n)
 // FUNCTION TO DISPLAY ALL ACCOUNTS DISPLAY LIST
 void displayList()
 {
-    bankAccount de;  // class declaration
+    bankAccount de;  // class object
     ifstream inFile; // read from a file
-    inFile.open("deonto.cpp", ios::binary); // ppen binary file
+    inFile.open("deonto.cpp", ios::binary); // open binary file
     if (!inFile) // if file is not found
     {
         cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t File location Not Found ! Press any Key...";
@@ -567,7 +567,7 @@ void displayList()
     cout << "\t\t\t=========================================================================\n";
     while (inFile.read(reinterpret_cast<char *>(&de), sizeof(bankAccount))) // interpret pointer for user comprehension
     {
-        de.accountDetails();  // open all account details
+        de.accountDetails();  // method to open all account details
     }
     inFile.close(); // close file
 }
@@ -579,7 +579,7 @@ void deposit_withdraw(int n, int option)
 {
     int cash; // variable declaration
     bool found = false;
-    bankAccount de; // class declaration
+    bankAccount de; // class object
     fstream File; // both read and write from and to a file
     File.open("deonto.cpp", ios::binary | ios::in | ios::out); // allows input and output in the file
     if (!File) // if file is not located
@@ -592,7 +592,7 @@ void deposit_withdraw(int n, int option)
         File.read(reinterpret_cast<char *>(&de), sizeof(bankAccount)); // interprets account details for user comprehension
         if (de.retaccountNum() == n) // if input is similar to an account number
         {
-            de.showAccount(); //print account details
+            de.showAccount(); // method to print account details
             if (option == 1) // if deposit
             {
                 cout << "\n\t\t\t\t''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\n";
@@ -604,8 +604,8 @@ void deposit_withdraw(int n, int option)
                 loadingBar("DEPOSITING CASH");// calls loading bar
                 system ("cls"); // clears screen
                 cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tCASH DEPOSIT SUCCESSFUL";
-                de.depositCash(cash); // apply changes
-                de.showAccount(); // function call to show account details
+                de.depositCash(cash); // method to deposit cash
+                de.showAccount(); // method to show account details
             }
             if (option == 2) // if withdraw
             {
@@ -624,7 +624,7 @@ void deposit_withdraw(int n, int option)
       				loadingBar("WITHDRAWING CASH"); // calls loading bar
 					system ("CLS"); // clears screen
 					cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tCASH WITHDRAWAL SUCCESSFUL";}
-					de.showAccount(); // function call to show account details
+					de.showAccount(); // method to show account details
             }
             int pos = (-1) * static_cast<int>(sizeof(de));
             File.seekp(pos, ios::cur); // to current position of the buffer
