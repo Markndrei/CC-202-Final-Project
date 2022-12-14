@@ -67,7 +67,7 @@ void bankAccount::createAccount()
     cin.ignore(); // ignores characters given the delimiter
     cin.getline(fullname, 99); // allows string input
     // prompts user to input account type
-    cout << "\n\t\t\tInput Type of The account [C = Current; S = Savings] : ";
+    cout << "\n\t\t\tInput Type of account [C = Current; S = Savings] : ";
     cin >> type;
     type = toupper(type); // converts characters to uppercases
     cout << "\n\t\t\tInput Minimum Deposit [C = 5000 < Initial; S = 2000 < Initial]: ";
@@ -104,7 +104,7 @@ void bankAccount::modifyDetails()
     cout << "\n\t\t\tAccount Holder Name : ";
     cin.ignore(); // takes number of characters name as arguments for vivid record
     cin.getline(fullname, 99); // allows the progam to acquire multiple characters
-    cout << "\t\t\tType of Account : ";
+    cout << "\t\t\tInput Type of account [C = Current; S = Savings] :";
     cin >> type; // prompts type of account input
     type = toupper(type); // converts character inputs to uppercases
 }
@@ -114,17 +114,17 @@ void bankAccount::modifyDetails()
 
 
 // FUNCTION DEFINITION FOR CASH DEPOSIT
-void bankAccount::depositCash(int x)
+void bankAccount::depositCash(int cash)
 {
-    minimumDep += x; // short notation for deposit
+    minimumDep += cash; // short notation for deposit
 }
 //-------------------------------------------------------------------------------------------------------------------//
 
 
 // FUNCTION DEFINITION FOR CASH WITHDRAWAL
-void bankAccount::withdrawCash(int x)
+void bankAccount::withdrawCash(int cash)
 {
-    	minimumDep -= x; // short notation for withdraw
+    	minimumDep -= cash; // short notation for withdraw
 }
 //				END OF CASH WITHDRAWAL FUNCTION PROTOTYPE
 //--------------------------------------------------------------------------------------------------------------//
@@ -409,19 +409,20 @@ void drawing(ifstream& in_s) // function header for bank drawing file reading
 
 void writeAccount()
 {
-    bankAccount ac; // declares class
+    bankAccount de; // declares class
     ofstream outFile; // stream to write to files
     outFile.open("deonto.cpp", ios::binary | ios::app); // open file and avoid overwriting inputs
-    ac.createAccount(); //calls create Account function
-    	if ((ac.retminimumDep () < 2000 && ac.rettype() == 'S') || (ac.retminimumDep () < 5000 && ac.rettype() == 'C')){  // condition for 
+    de.createAccount(); //calls create Account function
+    	if ((de.retminimumDep () < 2000 && de.rettype() == 'S') || (de.retminimumDep () < 5000 && de.rettype() == 'C')){  // condition for 
                 	system ("CLS");// clears screen												 insufficent balance
                     cout << "\n\n\n\n\n\n\n\n\n\t\t\t\tCANNOT ESTABLISH ACCOUNT DUE TO INSUFFICIENT BALANCE";}
         else{ // sufficient balance
-			outFile.write(reinterpret_cast<char *>(&ac), sizeof(bankAccount));//cast structure pointer to const char* and write data
+			outFile.write(reinterpret_cast<char *>(&de), sizeof(bankAccount));//cast structure pointer to const char* and write data
     		system ("CLS"); // clear screen
       		loadingBar("CREATING ACCOUNT"); // function call for loading bar
 			system ("CLS"); // clear screen
-			cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t ACCOUNT ESTABLISHED";														  // as expected by the write () function
+			cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t ACCOUNT ESTABLISHED";
+			de.showAccount(); // function call to show account details														  // as expected by the write () function
     	}
     outFile.close(); // close file
 }
@@ -430,7 +431,7 @@ void writeAccount()
 //FUNCTION TO READ SPECIFIC RECORD FROM A FILE
 void displayDetails(int n)
 {
-    bankAccount ac; // declares class
+    bankAccount de; // declares class
     bool flag = false; // boolean expreassion
     ifstream inFile; // stream to read files
     inFile.open("deonto.cpp", ios::binary); // open file and avoid overwriting inputs
@@ -439,14 +440,14 @@ void displayDetails(int n)
         cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t File location Not Found ! Press any Key...";
         return;
     }
-    while (inFile.read(reinterpret_cast<char *>(&ac), sizeof(bankAccount))) /* if file is located and interprets file 
+    while (inFile.read(reinterpret_cast<char *>(&de), sizeof(bankAccount))) /* if file is located and interprets file 
 																			for user comprehension*/
     {
-        if (ac.retaccountNum() == n) // checker if the user input is similar to the recorded accounts
+        if (de.retaccountNum() == n) // checker if the user input is similar to the recorded accounts
         {   	
-			cout << "\n\t\t\t\t\t\t BALANCE DETAILS\n";
+			cout << "\n\n\n\t\t\t\t\t\t BALANCE DETAILS\n";
         	flag = true;// if account number input match the records
-            ac.showAccount(); // function call to show account details
+            de.showAccount(); // function call to show account details
         }
     }
     inFile.close();
@@ -461,7 +462,7 @@ void displayDetails(int n)
 void modifyAccount(int n)
 {
     bool found = false; 
-    bankAccount ac; // function call
+    bankAccount de; // function call
     fstream File; // both read and write from and to a file
     File.open("deonto.cpp", ios::binary | ios::in | ios::out); // open file location
     if (!File) // if file is not found
@@ -471,15 +472,15 @@ void modifyAccount(int n)
     }
     while (!File.eof() && found == false) // condition if file is found
     {
-        File.read(reinterpret_cast<char *>(&ac), sizeof(bankAccount));/*cast structure pointer to const char* and write data
+        File.read(reinterpret_cast<char *>(&de), sizeof(bankAccount));/*cast structure pointer to const char* and write data
     																   as expected by the write () function for user 
 																	   comprehension*/
-        if (ac.retaccountNum() == n) // checker if the account number is similar to the input
+        if (de.retaccountNum() == n) // checker if the account number is similar to the input
         {
-            ac.showAccount(); // function call to show account details
+            de.showAccount(); // function call to show account details
             cout << "\n\t\t\t\t\t\tPROVIDE REPLACEMENT DETAILS" << endl;
-            ac.modifyDetails(); // function to initiate modifying account details
-                if ((ac.retminimumDep () < 2000 && ac.rettype() == 'S') || (ac.retminimumDep () < 5000 && ac.rettype() == 'C')){  // condition for 
+            de.modifyDetails(); // function to initiate modifying account details
+                if ((de.retminimumDep () < 2000 && de.rettype() == 'S') || (de.retminimumDep () < 5000 && de.rettype() == 'C')){  // condition for 
                 system ("CLS");// clears screen												 insufficent balance
                 cout << "\n\n\n\n\n\n\n\n\n\t\t\t\tCANNOT MODIFY ACCOUNT DUE TO INSUFFICIENT BALANCE";
                 cout << "\n\t\t\t\t\t\t TRY AGAIN...";
@@ -488,13 +489,14 @@ void modifyAccount(int n)
                 else{ // sufficient balance
 	            int pos = (-1) * static_cast<int>(sizeof(bankAccount)); // change position
 	            File.seekp(pos, ios::cur); // to current position
-	            File.write(reinterpret_cast<char *>(&ac), sizeof(bankAccount));/*cast structure pointer to const char* and write data
+	            File.write(reinterpret_cast<char *>(&de), sizeof(bankAccount));/*cast structure pointer to const char* and write data
 	    																   as expected by the write () function for user 
 																		   comprehension*/
 	            system ("CLS");// clears screen
 	      		loadingBar("MODIFYING ACCOUNT"); // call loadingBar function
 	      		system ("CLS");// clears screen
 	            cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t ACCOUNT MODIFIED";
+	            de.showAccount(); // function call to show account details
 	            found = true;}
         }
     }
@@ -509,7 +511,7 @@ void modifyAccount(int n)
 void deleteAccount(int n)
 {
 	int choice;
-    bankAccount ac; // class call
+    bankAccount de; // class call
     ifstream inFile; // read from a file
     ofstream outFile; // write to a file
     inFile.open("deonto.cpp", ios::binary); // open main file
@@ -520,16 +522,16 @@ void deleteAccount(int n)
     }
     outFile.open("Temp.dat", ios::binary); // open temporary file
     inFile.seekg(0, ios::beg); // seek position from the beginning of the buffer
-    while (inFile.read(reinterpret_cast<char *>(&ac), sizeof(bankAccount)))
+    while (inFile.read(reinterpret_cast<char *>(&de), sizeof(bankAccount)))
     {
-        if (ac.retaccountNum() != n) // if account number is not similar
+        if (de.retaccountNum() != n) // if account number is not similar
         {
-            outFile.write(reinterpret_cast<char *>(&ac), sizeof(bankAccount)); // no altering
+            outFile.write(reinterpret_cast<char *>(&de), sizeof(bankAccount)); // no altering
         }
     }
     inFile.close(); // close file
     outFile.close(); // close file
-    cout << "\n\n\t\t\tAre you sure you want to proceed?[ 1 = Yes, 2 = No ] ";
+    cout << "\n\n\t\t\tAre you sure you wish to proceed?[ 1 = Yes, 2 = No ] ";
 	cin >> choice;
 	if (choice == 1){
     remove("deonto.cpp"); // remove acount from the list
@@ -545,10 +547,10 @@ void deleteAccount(int n)
 }
 
 //-------------------------------------------------------------------------------------------------------//
-// FUNCTION TO DISPLAY ALL ACCOUNTS DEPOSIT LIST
+// FUNCTION TO DISPLAY ALL ACCOUNTS DISPLAY LIST
 void displayList()
 {
-    bankAccount ac;  // class declaration
+    bankAccount de;  // class declaration
     ifstream inFile; // read from a file
     inFile.open("deonto.cpp", ios::binary); // ppen binary file
     if (!inFile) // if file is not found
@@ -563,9 +565,9 @@ void displayList()
     cout << "\t\t\t=========================================================================\n";
     cout << "\t\t\t=  ACCT NO                  NAME                    TYPE      BALANCE   =\n";
     cout << "\t\t\t=========================================================================\n";
-    while (inFile.read(reinterpret_cast<char *>(&ac), sizeof(bankAccount))) // interpret pointer for user comprehension
+    while (inFile.read(reinterpret_cast<char *>(&de), sizeof(bankAccount))) // interpret pointer for user comprehension
     {
-        ac.accountDetails();  // open all account details
+        de.accountDetails();  // open all account details
     }
     inFile.close(); // close file
 }
@@ -577,7 +579,7 @@ void deposit_withdraw(int n, int option)
 {
     int cash; // variable declaration
     bool found = false;
-    bankAccount ac; // class declaration
+    bankAccount de; // class declaration
     fstream File; // both read and write from and to a file
     File.open("deonto.cpp", ios::binary | ios::in | ios::out); // allows input and output in the file
     if (!File) // if file is not located
@@ -587,10 +589,10 @@ void deposit_withdraw(int n, int option)
     }
     while (!File.eof() && found == false) // if no end of file errors
     {
-        File.read(reinterpret_cast<char *>(&ac), sizeof(bankAccount)); // interprets account details for user comprehension
-        if (ac.retaccountNum() == n) // if input is similar to an account number
+        File.read(reinterpret_cast<char *>(&de), sizeof(bankAccount)); // interprets account details for user comprehension
+        if (de.retaccountNum() == n) // if input is similar to an account number
         {
-            ac.showAccount(); //print account details
+            de.showAccount(); //print account details
             if (option == 1) // if deposit
             {
                 cout << "\n\t\t\t\t''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''\n";
@@ -602,7 +604,8 @@ void deposit_withdraw(int n, int option)
                 loadingBar("DEPOSITING CASH");// calls loading bar
                 system ("cls"); // clears screen
                 cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tCASH DEPOSIT SUCCESSFUL";
-                ac.depositCash(cash); // apply changes
+                de.depositCash(cash); // apply changes
+                de.showAccount(); // function call to show account details
             }
             if (option == 2) // if withdraw
             {
@@ -611,20 +614,21 @@ void deposit_withdraw(int n, int option)
 				cout << "\n\t\t\t\t================================================================\n";
                 cout << "\t\t\t\tEnter The amount to be withdrawn: "; // prompts user 
                 cin >> cash;
-                int bal = ac.retminimumDep() - cash; // withdraw cash
-                	if ((bal < 2000 && ac.rettype() == 'S') || (bal < 5000 && ac.rettype() == 'C')){  // condition for 
+                int bal = de.retminimumDep() - cash; // withdraw cash
+                	if ((bal < 2000 && de.rettype() == 'S') || (bal < 5000 && de.rettype() == 'C')){  // condition for 
                 	system ("CLS");// clears screen												 insufficent balance
                     cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t INSUFFICIENT BALANCE";}
                 else{ // sufficient balance
-                 ac.withdrawCash(cash); // apply changes
+                 de.withdrawCash(cash); // apply changes
                    system ("CLS"); // clears screen
       				loadingBar("WITHDRAWING CASH"); // calls loading bar
 					system ("CLS"); // clears screen
 					cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t\tCASH WITHDRAWAL SUCCESSFUL";}
+					de.showAccount(); // function call to show account details
             }
-            int pos = (-1) * static_cast<int>(sizeof(ac));
+            int pos = (-1) * static_cast<int>(sizeof(de));
             File.seekp(pos, ios::cur); // to current position of the buffer
-            File.write(reinterpret_cast<char *>(&ac), sizeof(bankAccount)); // apply changes
+            File.write(reinterpret_cast<char *>(&de), sizeof(bankAccount)); // apply changes
             found = true;
         }
     }

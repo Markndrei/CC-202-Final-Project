@@ -8,6 +8,6 @@
 			+          04. ACCOUNT DETAILS              +
 			+          05. ACCOUNT LIST                 +
 			+          06. MODIFY ACCOUNT               +
-			+          06. TERMINATE ACCOUNT	    + 
+			+          07. TERMINATE ACCOUNT	    + 
 			+          08. EXIT		            +
 			+++++++++++++++++++++++++++++++++++++++++++++
